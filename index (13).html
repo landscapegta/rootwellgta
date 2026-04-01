@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rootwell Landscaping | Lawn Care & Landscaping Mississauga & GTA</title>
+  <meta name="description" content="Professional lawn care and landscaping in Mississauga, Brampton, Oakville, Vaughan & GTA. Free estimates, no contracts. Call (365) 885-6489." />
+  <meta name="keywords" content="landscaping Mississauga, lawn care GTA, lawn maintenance Brampton, landscaping Oakville, lawn mowing Vaughan, garden design Toronto" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --moss:    #2d3b2a;
+      --sage:    #5a7a52;
+      --sage-lt: #7a9e72;
+      --cream:   #f5f0e8;
+      --warm:    #ede7d9;
+      --stone:   #b8a98a;
+      --text:    #1c2118;
+      --muted:   #6b7566;
+      --white:   #ffffff;
+      --gold:    #c9a84c;
+      --radius:  4px;
+      --nav-h:   72px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    .serif { font-family: 'Cormorant Garamond', serif; }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 300; line-height: 1.15; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      transition: background .35s, box-shadow .35s;
+    }
+    nav.scrolled {
+      background: rgba(245,240,232,.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,.08);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+    .nav-logo svg { width: 28px; height: 28px; }
+    .nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; letter-spacing: .02em; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: .85rem; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; transition: color .2s; }
+    .nav-links a:hover { color: var(--moss); }
+    .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 10px 22px; border-radius: var(--radius); transition: background .2s !important; }
+    .nav-cta:hover { background: var(--sage) !important; color: var(--cream) !important; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--text); transition: all .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0; z-index: 99; background: var(--cream); flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--text); text-decoration: none; transition: color .2s; }
+    .mobile-menu a:hover { color: var(--sage); }
+    .mobile-menu .m-cta { background: var(--moss); color: var(--cream) !important; padding: 14px 40px; border-radius: var(--radius); font-size: 1.2rem; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+      padding: calc(var(--nav-h) + 60px) 48px 80px;
+      gap: 60px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(90,122,82,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 560px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(90,122,82,.12); border: 1px solid rgba(90,122,82,.25);
+      color: var(--sage); padding: 6px 14px; border-radius: 20px;
+      font-size: .75rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sage); }
+    h1.hero-title { font-size: clamp(3rem, 6vw, 5.5rem); color: var(--moss); margin-bottom: 24px; }
+    h1.hero-title em { color: var(--sage); font-style: italic; }
+    .hero-sub { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 440px; margin-bottom: 40px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--moss); color: var(--cream); padding: 14px 28px; border-radius: var(--radius); text-decoration: none; font-size: .9rem; font-weight: 500; letter-spacing: .03em; transition: background .2s, transform .2s; }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--moss); color: var(--moss); padding: 14px 28px; border-radius: var(--radius); text-decoration: none; font-size: .9rem; font-weight: 500; letter-spacing: .03em; transition: background .2s, color .2s, transform .2s; }
+    .btn-outline:hover { background: var(--moss); color: var(--cream); transform: translateY(-1px); }
+
+    .hero-stats { display: flex; gap: 40px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,.1); flex-wrap: wrap; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: var(--moss); line-height: 1; }
+    .stat-label { font-size: .78rem; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; margin-top: 4px; }
+
+    .hero-visual { position: relative; height: 580px; border-radius: 2px; overflow: hidden; background: var(--moss); }
+    .hero-visual-inner { width: 100%; height: 100%; background: linear-gradient(160deg, #3a5236 0%, #2d3b2a 40%, #1e2a1b 100%); display: flex; align-items: center; justify-content: center; position: relative; }
+    .hero-visual-inner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(90,122,82,.35) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(122,158,114,.2) 0%, transparent 40%); }
+    .hero-plant-svg { width: 260px; height: 260px; opacity: .85; }
+    .hero-tag { position: absolute; bottom: 32px; left: 32px; background: rgba(245,240,232,.95); backdrop-filter: blur(8px); padding: 16px 20px; border-radius: var(--radius); display: flex; align-items: center; gap: 12px; }
+    .hero-tag-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+    .hero-tag-text { font-size: .8rem; font-weight: 400; color: var(--text); }
+    .hero-tag-text strong { display: block; font-weight: 500; }
+
+    /* Pricing tag */
+    .hero-price-tag { position: absolute; top: 32px; right: 32px; background: var(--gold); color: var(--white); padding: 14px 18px; border-radius: var(--radius); font-family: 'Cormorant Garamond', serif; text-align: center; line-height: 1.3; }
+    .hero-price-tag .from { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+    .hero-price-tag .price { font-size: 1.8rem; font-weight: 600; display: block; }
+    .hero-price-tag .desc { font-size: .7rem; opacity: .85; }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap { background: var(--moss); color: var(--cream); padding: 16px 0; overflow: hidden; }
+    .marquee-track { display: flex; gap: 48px; animation: marquee 28s linear infinite; white-space: nowrap; }
+    .marquee-track span { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
+    .marquee-track .dot { color: var(--gold); font-size: 1rem; opacity: 1; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── LOCATION STRIP ── */
+    .location-strip { background: var(--moss); border-top: 1px solid rgba(255,255,255,.08); padding: 16px 48px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .location-strip span { color: rgba(245,240,232,.5); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+    .location-strip a { color: rgba(245,240,232,.75); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; transition: color .2s; }
+    .location-strip a:hover { color: var(--cream); }
+    .location-strip .sep { color: rgba(245,240,232,.25); }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 100px 48px; }
+    .section-label { display: inline-flex; align-items: center; gap: 10px; font-size: .72rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px; }
+    .section-label::before { content: ''; width: 24px; height: 1px; background: var(--sage); }
+    h2.section-title { font-size: clamp(2.2rem, 4vw, 3.4rem); color: var(--moss); margin-bottom: 16px; }
+    .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 520px; margin-bottom: 60px; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar { background: var(--white); border-top: 1px solid rgba(0,0,0,.06); border-bottom: 1px solid rgba(0,0,0,.06); padding: 28px 48px; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 10px; }
+    .trust-item-icon { font-size: 1.1rem; }
+    .trust-item-text { font-size: .82rem; color: var(--muted); font-weight: 400; }
+    .trust-item-text strong { color: var(--text); font-weight: 500; display: block; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .service-card { padding: 40px 32px; background: var(--white); border: 1px solid rgba(0,0,0,.07); transition: background .3s, transform .3s, box-shadow .3s; cursor: default; position: relative; }
+    .service-card:hover { background: var(--moss); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.12); }
+    .service-card:hover .service-icon { background: rgba(255,255,255,.12); color: var(--cream); }
+    .service-card:hover .service-name { color: var(--cream); }
+    .service-card:hover .service-desc { color: rgba(245,240,232,.65); }
+    .service-card:hover .service-price { color: var(--gold); }
+    .service-card:hover .service-arrow { color: var(--gold); }
+    .service-icon { width: 52px; height: 52px; border-radius: 8px; background: rgba(90,122,82,.1); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px; transition: background .3s, color .3s; }
+    .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--moss); margin-bottom: 10px; transition: color .3s; }
+    .service-desc { font-size: .88rem; color: var(--muted); line-height: 1.7; transition: color .3s; }
+    .service-price { font-size: .78rem; font-weight: 500; color: var(--sage); letter-spacing: .05em; margin-top: 14px; transition: color .3s; }
+    .service-arrow { margin-top: 20px; font-size: 1.2rem; color: var(--sage); transition: color .3s; display: block; }
+
+    /* ── ABOUT ── */
+    #about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-visual { position: relative; height: 520px; background: linear-gradient(145deg, #3a5236, #2d3b2a); border-radius: 2px; overflow: hidden; }
+    .about-visual::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 40% 60%, rgba(90,122,82,.4), transparent 60%); }
+    .about-accent { position: absolute; bottom: -20px; right: -20px; width: 160px; height: 160px; background: var(--warm); border: 3px solid var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; z-index: 2; }
+    .about-accent .num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--moss); font-weight: 300; line-height: 1; }
+    .about-accent .lbl { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 36px; }
+    .about-list li { display: flex; align-items: flex-start; gap: 14px; font-size: .95rem; color: var(--muted); line-height: 1.5; }
+    .about-list li::before { content: '✓'; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: rgba(90,122,82,.12); color: var(--sage); display: flex; align-items: center; justify-content: center; font-size: .75rem; margin-top: 1px; }
+
+    /* ── PRICING SECTION ── */
+    #pricing { background: var(--warm); }
+    .pricing-note { display: inline-flex; align-items: center; gap: 8px; background: rgba(45,59,42,.08); border: 1px solid rgba(45,59,42,.15); color: var(--moss); padding: 8px 16px; border-radius: 20px; font-size: .8rem; font-weight: 400; margin-bottom: 48px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .pricing-card { background: var(--white); border-radius: var(--radius); padding: 40px 32px; position: relative; border: 1px solid rgba(0,0,0,.07); }
+    .pricing-card.featured { background: var(--moss); border-color: var(--moss); }
+    .pricing-card.featured .pricing-name { color: rgba(245,240,232,.6); }
+    .pricing-card.featured .pricing-price { color: var(--cream); }
+    .pricing-card.featured .pricing-period { color: rgba(245,240,232,.5); }
+    .pricing-card.featured .pricing-desc { color: rgba(245,240,232,.65); }
+    .pricing-card.featured .pricing-item { color: rgba(245,240,232,.8); border-color: rgba(255,255,255,.1); }
+    .pricing-card.featured .pricing-item::before { background: rgba(201,168,76,.3); color: var(--gold); }
+    .pricing-card.featured .btn-pricing { background: var(--cream); color: var(--moss); }
+    .pricing-card.featured .btn-pricing:hover { background: var(--warm); }
+    .popular-tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--white); padding: 4px 16px; border-radius: 20px; font-size: .72rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+    .pricing-name { font-size: .75rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .pricing-price { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--moss); line-height: 1; font-weight: 300; }
+    .pricing-period { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+    .pricing-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; margin: 20px 0 24px; }
+    .pricing-items { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .pricing-item { font-size: .88rem; color: var(--muted); display: flex; align-items: flex-start; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid rgba(0,0,0,.06); }
+    .pricing-item::before { content: '✓'; flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; background: rgba(90,122,82,.12); color: var(--sage); display: flex; align-items: center; justify-content: center; font-size: .7rem; margin-top: 1px; }
+    .btn-pricing { display: block; text-align: center; padding: 13px 24px; border-radius: var(--radius); text-decoration: none; font-size: .88rem; font-weight: 500; letter-spacing: .03em; border: 1.5px solid var(--moss); color: var(--moss); transition: background .2s, color .2s; }
+    .btn-pricing:hover { background: var(--moss); color: var(--cream); }
+
+    /* ── AREAS SECTION ── */
+    #areas { background: var(--white); }
+    .areas-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+    .area-card { padding: 32px 24px; border: 1px solid rgba(0,0,0,.07); text-align: center; transition: background .2s; }
+    .area-card:hover { background: rgba(90,122,82,.05); }
+    .area-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .area-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--moss); margin-bottom: 6px; }
+    .area-desc { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--warm); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .review-card { background: var(--white); padding: 36px; border-radius: var(--radius); box-shadow: 0 2px 20px rgba(0,0,0,.05); display: flex; flex-direction: column; gap: 20px; }
+    .stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; }
+    .review-text { font-size: 1.05rem; color: var(--muted); line-height: 1.75; font-style: italic; font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+    .reviewer { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+    .reviewer-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--warm); border: 2px solid var(--stone); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .reviewer-name { font-weight: 500; font-size: .9rem; color: var(--text); }
+    .reviewer-loc { font-size: .78rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--moss); }
+    #contact .section-label { color: rgba(245,240,232,.5); }
+    #contact .section-label::before { background: rgba(245,240,232,.5); }
+    #contact h2.section-title { color: var(--cream); }
+    #contact .section-sub { color: rgba(245,240,232,.6); max-width: 420px; }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
+    .contact-item-icon { width: 44px; height: 44px; border-radius: var(--radius); background: rgba(255,255,255,.1); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .contact-item-label { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(245,240,232,.45); margin-bottom: 4px; }
+    .contact-item-val { color: var(--cream); font-size: .95rem; }
+    .contact-item-val a { color: inherit; text-decoration: none; }
+    .contact-item-val a:hover { text-decoration: underline; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(245,240,232,.5); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius); color: var(--cream); padding: 12px 16px;
+      font-family: 'DM Sans', sans-serif; font-size: .9rem; font-weight: 300;
+      outline: none; transition: border-color .2s, background .2s; appearance: none; -webkit-appearance: none;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(245,240,232,.3); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.1); }
+    .form-group select option { background: var(--moss); color: var(--cream); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit { display: flex; align-items: center; gap: 10px; background: var(--cream); color: var(--moss); padding: 14px 32px; border: none; border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: .9rem; font-weight: 500; cursor: pointer; transition: background .2s, transform .2s; align-self: flex-start; letter-spacing: .03em; }
+    .form-submit:hover { background: var(--warm); transform: translateY(-1px); }
+    .form-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    .form-success { display: none; padding: 24px; border-radius: var(--radius); background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); color: var(--cream); text-align: center; }
+    .form-success.show { display: block; }
+    .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 8px; }
+    .form-success p { font-size: .9rem; opacity: .7; }
+
+    .form-error-msg { background: rgba(255,80,80,.15); border: 1px solid rgba(255,80,80,.3); color: #ffaaaa; padding: 12px 16px; border-radius: var(--radius); font-size: .85rem; display: none; }
+    .form-error-msg.show { display: block; }
+    .field-error { border-color: rgba(255,80,80,.5) !important; }
+    .field-error-text { font-size: .75rem; color: #ffaaaa; margin-top: 4px; display: none; }
+    .field-error-text.show { display: block; }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 999; display: flex; align-items: center; gap: 10px; background: #25D366; color: #fff; padding: 12px 20px; border-radius: 40px; text-decoration: none; font-size: .88rem; font-weight: 500; box-shadow: 0 4px 24px rgba(37,211,102,.35); transition: transform .2s, box-shadow .2s; }
+    .wa-float:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,.45); }
+    .wa-float svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+    .wa-text { display: block; }
+
+    /* ── FOOTER ── */
+    footer { background: #1a2417; color: rgba(245,240,232,.5); padding: 60px 48px 36px; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: .88rem; line-height: 1.7; margin-top: 12px; max-width: 240px; }
+    .footer-col h4 { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,240,232,.3); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(245,240,232,.5); text-decoration: none; font-size: .88rem; transition: color .2s; }
+    .footer-col ul a:hover { color: var(--cream); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: .8rem; }
+    .footer-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--cream); }
+    .footer-wsib { font-size: .75rem; color: rgba(245,240,232,.3); margin-top: 8px; }
+
+    /* ── ANIMATIONS ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav { padding: 0 28px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { grid-template-columns: 1fr; padding: calc(var(--nav-h) + 40px) 28px 60px; gap: 40px; text-align: center; }
+      .hero-content { max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { height: 320px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      #about { grid-template-columns: 1fr; gap: 48px; padding: 80px 28px; }
+      .about-visual { height: 320px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .areas-grid { grid-template-columns: 1fr 1fr; }
+      section { padding: 80px 28px; }
+      .trust-bar { gap: 24px; padding: 24px 28px; }
+      .location-strip { padding: 16px 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .wa-text { display: none; }
+      .wa-float { padding: 14px; border-radius: 50%; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .areas-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 60px 20px; }
+      #contact { padding: 60px 20px; }
+      footer { padding: 48px 20px 28px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .trust-bar { flex-direction: column; gap: 16px; padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="14" cy="14" r="13" stroke="#2d3b2a" stroke-width="1.5"/>
+      <path d="M14 22 C14 22 8 17 8 11 C8 7.7 10.7 5 14 5 C17.3 5 20 7.7 20 11 C20 17 14 22 14 22Z" fill="#5a7a52" opacity=".7"/>
+      <line x1="14" y1="22" x2="14" y2="26" stroke="#2d3b2a" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">Rootwell</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#areas">Areas</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Free Quote</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" class="m-link">Services</a>
+  <a href="#pricing" class="m-link">Pricing</a>
+  <a href="#areas" class="m-link">Areas</a>
+  <a href="#about" class="m-link">About</a>
+  <a href="#testimonials" class="m-link">Reviews</a>
+  <a href="#contact" class="m-link m-cta">Free Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content fade-in">
+    <div class="hero-badge">Serving Mississauga, Brampton, Vaughan & GTA</div>
+    <h1 class="hero-title">Your Yard,<br><em>Beautifully</em> Reimagined</h1>
+    <p class="hero-sub">At Rootwell, we transform overgrown, tired yards into stunning outdoor spaces you'll love coming home to. Friendly service, honest pricing, and results that speak for themselves.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a Free Quote →</a>
+      <a href="tel:3658856489" class="btn-outline">📞 (365) 885-6489</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">Free</div>
+        <div class="stat-label">Estimates, Always</div>
+      </div>
+      <div>
+        <div class="stat-num">24hr</div>
+        <div class="stat-label">Response Guarantee</div>
+      </div>
+      <div>
+        <div class="stat-num">GTA</div>
+        <div class="stat-label">Locally Rooted</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual fade-in" style="transition-delay:.15s">
+    <div class="hero-visual-inner">
+      <svg class="hero-plant-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 180 L100 60" stroke="rgba(245,240,232,.4)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M100 120 C100 120 70 105 55 80 C70 85 90 95 100 120Z" fill="rgba(90,122,82,.6)"/>
+        <path d="M100 100 C100 100 130 82 148 55 C132 63 108 78 100 100Z" fill="rgba(122,158,114,.5)"/>
+        <path d="M100 140 C100 140 76 128 62 106 C76 112 94 122 100 140Z" fill="rgba(90,122,82,.4)"/>
+        <path d="M100 155 C100 155 124 140 140 116 C126 123 106 136 100 155Z" fill="rgba(122,158,114,.35)"/>
+        <circle cx="100" cy="55" r="12" fill="rgba(201,168,76,.3)" stroke="rgba(201,168,76,.5)" stroke-width="1"/>
+        <circle cx="100" cy="55" r="5" fill="rgba(201,168,76,.6)"/>
+      </svg>
+    </div>
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      <div class="hero-tag-text">
+        <strong>Licensed & Insured</strong>
+        WSIB Covered · GTA Owned & Operated
+      </div>
+    </div>
+    <div class="hero-price-tag">
+      <span class="from">Starting from</span>
+      <span class="price">$60</span>
+      <span class="desc">Lawn maintenance</span>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <span class="trust-item-icon">🛡️</span>
+    <div class="trust-item-text"><strong>Fully Licensed & Insured</strong>WSIB covered for your protection</div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-item-icon">📞</span>
+    <div class="trust-item-text"><strong>24-Hour Response</strong>We call back same day, guaranteed</div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-item-icon">💰</span>
+    <div class="trust-item-text"><strong>No Hidden Fees</strong>Honest quotes, no surprises ever</div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-item-icon">🗓️</span>
+    <div class="trust-item-text"><strong>No Contracts Required</strong>Book as you go, cancel anytime</div>
+  </div>
+  <div class="trust-item">
+    <span class="trust-item-icon">🌿</span>
+    <div class="trust-item-text"><strong>Eco-Friendly Practices</strong>Sustainable, responsible methods</div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Lawn Maintenance</span><span class="dot">✦</span>
+    <span>Garden Design</span><span class="dot">✦</span>
+    <span>Hardscaping & Patios</span><span class="dot">✦</span>
+    <span>Tree & Shrub Trimming</span><span class="dot">✦</span>
+    <span>Seasonal Cleanup</span><span class="dot">✦</span>
+    <span>Full Yard Transformation</span><span class="dot">✦</span>
+    <span>Mississauga · Brampton · Vaughan · Oakville · Richmond Hill · Etobicoke</span><span class="dot">✦</span>
+    <span>Lawn Maintenance</span><span class="dot">✦</span>
+    <span>Garden Design</span><span class="dot">✦</span>
+    <span>Hardscaping & Patios</span><span class="dot">✦</span>
+    <span>Tree & Shrub Trimming</span><span class="dot">✦</span>
+    <span>Seasonal Cleanup</span><span class="dot">✦</span>
+    <span>Full Yard Transformation</span><span class="dot">✦</span>
+    <span>Mississauga · Brampton · Vaughan · Oakville · Richmond Hill · Etobicoke</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title fade-in">Services We Offer</h2>
+  <p class="section-sub fade-in">From a quick trim to a full yard transformation — we handle it all with care and expertise. Every job backed by our satisfaction guarantee.</p>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <div class="service-icon">✂️</div>
+      <div class="service-name">Lawn Mowing & Maintenance</div>
+      <div class="service-desc">Regular mowing, edging, and trimming to keep your lawn looking neat and healthy all season long.</div>
+      <div class="service-price">From $60 / visit</div>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-card fade-in" style="transition-delay:.08s">
+      <div class="service-icon">🌸</div>
+      <div class="service-name">Garden Design & Planting</div>
+      <div class="service-desc">Custom garden designs with beautiful seasonal plants, flowers, and shrubs that thrive in Ontario's climate.</div>
+      <div class="service-price">Free consultation included</div>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-card fade-in" style="transition-delay:.16s">
+      <div class="service-icon">🪨</div>
+      <div class="service-name">Hardscaping & Patios</div>
+      <div class="service-desc">Stone pathways, retaining walls, patios, and decorative features that add structure and charm to your yard.</div>
+      <div class="service-price">Custom quote — free estimate</div>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-card fade-in" style="transition-delay:.24s">
+      <div class="service-icon">🌳</div>
+      <div class="service-name">Tree & Shrub Trimming</div>
+      <div class="service-desc">Professional pruning and shaping to keep your trees and hedges healthy, safe, and beautiful year-round.</div>
+      <div class="service-price">From $80 / session</div>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-card fade-in" style="transition-delay:.32s">
+      <div class="service-icon">🍂</div>
+      <div class="service-name">Seasonal Cleanup</div>
+      <div class="service-desc">Spring and fall cleanups including leaf removal, aeration, overseeding, and mulching to prep your yard for any season.</div>
+      <div class="service-price">From $120 / cleanup</div>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-card fade-in" style="transition-delay:.40s">
+      <div class="service-icon">🏡</div>
+      <div class="service-name">Full Yard Transformation</div>
+      <div class="service-desc">Complete redesign of your outdoor space — from soil to stone, plant to pathway — with a unified vision.</div>
+      <div class="service-price">Custom quote — free site visit</div>
+      <span class="service-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-label">Transparent Pricing</div>
+  <h2 class="section-title fade-in">Simple, Honest Pricing</h2>
+  <p class="section-sub fade-in">No hidden fees. No long-term contracts. Just straightforward pricing for quality work. Every quote is free.</p>
+  <div class="pricing-note fade-in">
+    💡 These are starting prices — your exact quote is always free and tailored to your property
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card fade-in">
+      <div class="pricing-name">Basic Maintenance</div>
+      <div class="pricing-price">$60<span style="font-size:1.2rem;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:300">+</span></div>
+      <div class="pricing-period">per visit · no contract</div>
+      <div class="pricing-desc">Perfect for keeping your lawn tidy and well-maintained throughout the season.</div>
+      <ul class="pricing-items">
+        <li class="pricing-item">Lawn mowing & edging</li>
+        <li class="pricing-item">Grass clipping cleanup</li>
+        <li class="pricing-item">Basic trimming along fences & beds</li>
+        <li class="pricing-item">Same-day or next-day scheduling</li>
+      </ul>
+      <a href="#contact" class="btn-pricing">Get a Free Quote</a>
+    </div>
+
+    <div class="pricing-card featured fade-in" style="transition-delay:.1s">
+      <div class="popular-tag">Most Popular</div>
+      <div class="pricing-name">Regular Upkeep</div>
+      <div class="pricing-price">$200<span style="font-size:1.2rem;color:rgba(245,240,232,.5);font-family:'DM Sans',sans-serif;font-weight:300">+</span></div>
+      <div class="pricing-period">per month · biweekly visits</div>
+      <div class="pricing-desc">Your yard on autopilot. We show up, you relax. Best value for a consistently beautiful lawn.</div>
+      <ul class="pricing-items">
+        <li class="pricing-item">Biweekly mowing & edging</li>
+        <li class="pricing-item">Shrub and hedge trimming</li>
+        <li class="pricing-item">Weeding of garden beds</li>
+        <li class="pricing-item">Priority scheduling & booking</li>
+        <li class="pricing-item">Seasonal health check included</li>
+      </ul>
+      <a href="#contact" class="btn-pricing">Get a Free Quote</a>
+    </div>
+
+    <div class="pricing-card fade-in" style="transition-delay:.2s">
+      <div class="pricing-name">Full Transformation</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-period">free site visit & detailed quote</div>
+      <div class="pricing-desc">For bigger projects — patios, full redesigns, hardscaping, or complete yard makeovers.</div>
+      <ul class="pricing-items">
+        <li class="pricing-item">Free on-site consultation</li>
+        <li class="pricing-item">Hardscaping & patio installation</li>
+        <li class="pricing-item">Full garden design & planting</li>
+        <li class="pricing-item">Retaining walls & pathways</li>
+        <li class="pricing-item">Detailed project timeline provided</li>
+      </ul>
+      <a href="#contact" class="btn-pricing">Book a Free Site Visit</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREAS -->
+<section id="areas">
+  <div class="section-label">Where We Work</div>
+  <h2 class="section-title fade-in">Serving Your Neighbourhood</h2>
+  <p class="section-sub fade-in">We're based in Mississauga and serve communities across the Greater Toronto Area. Don't see your city? Give us a call — we'll let you know if we can help.</p>
+  <div class="areas-grid">
+    <div class="area-card fade-in">
+      <div class="area-icon">🏙️</div>
+      <div class="area-name">Mississauga</div>
+      <div class="area-desc">Our home base. All neighbourhoods from Port Credit to Malton.</div>
+    </div>
+    <div class="area-card fade-in" style="transition-delay:.08s">
+      <div class="area-icon">🌆</div>
+      <div class="area-name">Brampton</div>
+      <div class="area-desc">Serving all of Brampton from Bramalea to Heart Lake.</div>
+    </div>
+    <div class="area-card fade-in" style="transition-delay:.16s">
+      <div class="area-icon">🌳</div>
+      <div class="area-name">Vaughan</div>
+      <div class="area-desc">Woodbridge, Kleinburg, Maple, and all surrounding areas.</div>
+    </div>
+    <div class="area-card fade-in" style="transition-delay:.24s">
+      <div class="area-icon">🌿</div>
+      <div class="area-name">Oakville</div>
+      <div class="area-desc">From Old Oakville to Palermo and everything in between.</div>
+    </div>
+    <div class="area-card fade-in" style="transition-delay:.32s">
+      <div class="area-icon">🏡</div>
+      <div class="area-name">Richmond Hill</div>
+      <div class="area-desc">All of Richmond Hill including Jefferson and Oak Ridges.</div>
+    </div>
+    <div class="area-card fade-in" style="transition-delay:.40s">
+      <div class="area-icon">🌱</div>
+      <div class="area-name">Etobicoke</div>
+      <div class="area-desc">West Toronto neighbourhoods from Humber to Rexdale.</div>
+    </div>
+    <div class="area-card fade-in" style="transition-delay:.48s">
+      <div class="area-icon">🏘️</div>
+      <div class="area-name">Markham</div>
+      <div class="area-desc">Unionville, Thornhill, Buttonville and all of Markham.</div>
+    </div>
+    <div class="area-card fade-in" style="transition-delay:.56s">
+      <div class="area-icon">📍</div>
+      <div class="area-name">Your Area?</div>
+      <div class="area-desc">Not listed? <a href="#contact" style="color:var(--sage);text-decoration:none;">Ask us</a> — we're always expanding.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:var(--white);">
+  <div class="about-visual fade-in">
+    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;">
+      <svg width="180" height="220" viewBox="0 0 180 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="82" y="120" width="16" height="80" rx="3" fill="rgba(245,240,232,.25)"/>
+        <path d="M90 120 C90 120 50 95 35 52 C55 65 82 88 90 120Z" fill="rgba(90,122,82,.55)"/>
+        <path d="M90 120 C90 120 130 90 148 44 C128 60 96 84 90 120Z" fill="rgba(122,158,114,.5)"/>
+        <path d="M90 100 C90 100 60 78 48 42 C66 56 86 74 90 100Z" fill="rgba(90,122,82,.38)"/>
+        <path d="M90 140 C90 140 118 122 130 86 C116 98 98 116 90 140Z" fill="rgba(122,158,114,.35)"/>
+        <ellipse cx="90" cy="200" rx="42" ry="8" fill="rgba(245,240,232,.1)"/>
+      </svg>
+    </div>
+    <div class="about-accent">
+      <span class="num">GTA</span>
+      <span class="lbl">Locally<br>Rooted</span>
+    </div>
+  </div>
+  <div class="fade-in" style="transition-delay:.15s">
+    <div class="section-label">About Us</div>
+    <h2 class="section-title">Passionate About Every Property We Touch</h2>
+    <p class="section-sub">Rootwell was built on a simple belief: every homeowner deserves an outdoor space they're proud of. We treat your yard like our own — with care, expertise, and genuine pride in our work.</p>
+    <ul class="about-list">
+      <li>Locally owned and operated right here in Mississauga</li>
+      <li>Fully licensed, insured, and WSIB covered for your peace of mind</li>
+      <li>Eco-friendly practices and Ontario-native planting choices</li>
+      <li>Honest, transparent quotes with zero hidden fees</li>
+      <li>We show up on time, every time — your time matters</li>
+      <li>Free consultations and on-site visits for new customers</li>
+    </ul>
+    <div style="margin-top:40px;display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#contact" class="btn-primary">Book a Free Consultation →</a>
+      <a href="tel:3658856489" class="btn-outline">📞 Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-label">Reviews</div>
+  <h2 class="section-title fade-in">What Our Clients Say</h2>
+  <p class="section-sub fade-in">Every yard we touch, we aim to earn a 5-star review. See what GTA homeowners are saying about Rootwell.</p>
+
+  <div class="reviews-grid">
+    <div class="review-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Showed up on time, did a clean job on our lawn and the edges looked perfect. Very professional and reasonably priced. Will definitely be calling again this season."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👨</div>
+        <div>
+          <div class="reviewer-name">Mike T.</div>
+          <div class="reviewer-loc">Vaughan, ON</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card fade-in" style="transition-delay:.1s;background:var(--moss);border:none;">
+      <div style="text-align:center;padding:20px 0;">
+        <div style="font-size:2.5rem;margin-bottom:16px;">⭐</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--cream);font-weight:300;margin-bottom:12px;">Leave Us a Review</div>
+        <p style="font-size:.88rem;color:rgba(245,240,232,.65);line-height:1.6;margin-bottom:24px;">Worked with Rootwell? We'd really appreciate a Google review — it helps other GTA homeowners find us and means the world to a new business.</p>
+        <a href="https://g.page/r/rootwelllandscaping/review" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:var(--cream);color:var(--moss);padding:12px 24px;border-radius:var(--radius);text-decoration:none;font-size:.88rem;font-weight:500;">
+          ★ Review on Google
+        </a>
+      </div>
+    </div>
+
+    <div class="review-card fade-in" style="transition-delay:.2s">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Really happy with the interlocking work they did on our driveway. Great attention to detail and they cleaned up everything after. Highly recommend for anyone in the GTA."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👩</div>
+        <div>
+          <div class="reviewer-name">Priya S.</div>
+          <div class="reviewer-loc">Richmond Hill, ON</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title fade-in">Get Your Free Quote Today</h2>
+  <p class="section-sub fade-in">Tell us about your yard and we'll get back to you within 24 hours with a free, no-obligation estimate.</p>
+  <div class="contact-grid">
+    <div class="contact-info fade-in">
+      <div class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        <div>
+          <div class="contact-item-label">Phone / WhatsApp</div>
+          <div class="contact-item-val"><a href="tel:3658856489">(365) 885-6489</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">✉️</div>
+        <div>
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-val"><a href="mailto:landscape@rootwellgta.com">landscape@rootwellgta.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🌐</div>
+        <div>
+          <div class="contact-item-label">Website</div>
+          <div class="contact-item-val"><a href="https://rootwellgta.com">rootwellgta.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div>
+          <div class="contact-item-label">Service Area</div>
+          <div class="contact-item-val">Mississauga, Brampton, Vaughan,<br>Oakville, Richmond Hill & GTA</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🕐</div>
+        <div>
+          <div class="contact-item-label">Hours</div>
+          <div class="contact-item-val">Mon–Sat: 7am – 6pm<br><span style="font-size:.82rem;opacity:.65;">We respond to messages 7 days/week</span></div>
+        </div>
+      </div>
+      <div style="margin-top:8px;padding:20px;background:rgba(255,255,255,.06);border-radius:var(--radius);border:1px solid rgba(255,255,255,.1);">
+        <div style="font-size:.75rem;color:rgba(245,240,232,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;">Prefer to message?</div>
+        <a href="https://wa.me/13658856489" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:10px 20px;border-radius:40px;text-decoration:none;font-size:.85rem;font-weight:500;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+    <div class="fade-in" style="transition-delay:.15s">
+      <div id="formSuccess" class="form-success">
+        <h3>Request Sent! 🌿</h3>
+        <p>Thanks — we'll be in touch within 24 hours with your free estimate.</p>
+      </div>
+      <div id="formError" class="form-error-msg">Something went wrong. Please try again or call us directly.</div>
+      <form class="contact-form" id="quoteForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name *</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="name" />
+            <div class="field-error-text" id="nameErr">Please enter your name.</div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" placeholder="(416) 555-0000" autocomplete="tel" />
+            <div class="field-error-text" id="phoneErr">Please enter a valid phone number.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email" />
+          <div class="field-error-text" id="emailErr">Please enter a valid email address.</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="service">Service Needed *</label>
+            <select id="service" name="service">
+              <option value="" disabled selected>Select a service…</option>
+              <option>Lawn Mowing & Maintenance</option>
+              <option>Garden Design & Planting</option>
+              <option>Hardscaping & Patios</option>
+              <option>Tree & Shrub Trimming</option>
+              <option>Seasonal Cleanup</option>
+              <option>Full Yard Transformation</option>
+              <option>Not sure — need advice</option>
+            </select>
+            <div class="field-error-text" id="serviceErr">Please select a service.</div>
+          </div>
+          <div class="form-group">
+            <label for="city">Your City</label>
+            <input type="text" id="city" name="city" placeholder="e.g. Mississauga" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">Anything else we should know? <span style="opacity:.5;font-weight:300;">(optional)</span></label>
+          <textarea id="message" name="message" placeholder="Tell us about your yard — size, main issues, what you'd love to see…"></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">
+          <span id="submitText">Send My Request 🌿</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo-text">🌿 Rootwell Landscaping</div>
+      <p>Transforming outdoor spaces across the GTA with care, craftsmanship, and a love for the land.</p>
+      <div class="footer-wsib">Licensed · Insured · WSIB Covered · Locally Owned</div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Lawn Maintenance</a></li>
+        <li><a href="#services">Garden Design</a></li>
+        <li><a href="#services">Hardscaping</a></li>
+        <li><a href="#services">Tree Trimming</a></li>
+        <li><a href="#services">Seasonal Cleanup</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Service Areas</h4>
+      <ul>
+        <li><a href="#areas">Mississauga</a></li>
+        <li><a href="#areas">Brampton</a></li>
+        <li><a href="#areas">Vaughan</a></li>
+        <li><a href="#areas">Oakville</a></li>
+        <li><a href="#areas">Richmond Hill</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:3658856489">(365) 885-6489</a></li>
+        <li><a href="mailto:landscape@rootwellgta.com">landscape@rootwellgta.com</a></li>
+        <li><a href="https://rootwellgta.com">rootwellgta.com</a></li>
+        <li><a href="#contact">Free Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Rootwell Landscaping. All rights reserved. Mississauga, ON.</span>
+    <span>Made with 🌿 in the GTA</span>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/13658856489?text=Hi%20Rootwell!%20I%27d%20like%20a%20free%20quote%20for%20my%20yard." target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  <span class="wa-text">Quick Quote on WhatsApp</span>
+</a>
+
+<script>
+  // ── Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+
+  // ── Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.querySelectorAll('.m-link').forEach(l => l.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+
+  // ── Scroll fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── Form
+  const form = document.getElementById('quoteForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const submitText = document.getElementById('submitText');
+  const formSuccess = document.getElementById('formSuccess');
+  const formError = document.getElementById('formError');
+
+  function showFieldError(id, errId, show) {
+    document.getElementById(id).classList.toggle('field-error', show);
+    document.getElementById(errId).classList.toggle('show', show);
+  }
+
+  function validate() {
+    let ok = true;
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const service = document.getElementById('service').value;
+    if (name.length < 2) { showFieldError('name','nameErr',true); ok=false; } else showFieldError('name','nameErr',false);
+    if (!/^[\d\s()\-+]{7,}$/.test(phone)) { showFieldError('phone','phoneErr',true); ok=false; } else showFieldError('phone','phoneErr',false);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFieldError('email','emailErr',true); ok=false; } else showFieldError('email','emailErr',false);
+    if (!service) { showFieldError('service','serviceErr',true); ok=false; } else showFieldError('service','serviceErr',false);
+    return ok;
+  }
+
+  ['name','phone','email','service'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      const map = {name:'nameErr',phone:'phoneErr',email:'emailErr',service:'serviceErr'};
+      showFieldError(id, map[id], false);
+    });
+  });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    formError.classList.remove('show');
+    if (!validate()) return;
+    submitBtn.disabled = true;
+    submitText.textContent = 'Sending…';
+    const data = {
+      name: document.getElementById('name').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      service: document.getElementById('service').value,
+      city: document.getElementById('city').value.trim(),
+      message: document.getElementById('message').value.trim(),
+    };
+    try {
+      const res = await fetch('https://formspree.io/f/xlgoggeb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) { form.style.display = 'none'; formSuccess.classList.add('show'); }
+      else throw new Error();
+    } catch {
+      formError.classList.add('show');
+      submitBtn.disabled = false;
+      submitText.textContent = 'Send My Request 🌿';
+    }
+  });
+</script>
+</body>
+</html>
